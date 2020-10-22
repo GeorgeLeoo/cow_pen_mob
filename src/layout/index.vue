@@ -1,12 +1,11 @@
 <template>
-  <div>
+  <div class="layout">
     <router-view/>
     <TabBar :tab="tab"/>
   </div>
 </template>
 
 <script>
-// import HomeHeader from '@/components/HomeHeader/HomeHeader.vue'
 import TabBar from '@/components/TabBar/TabBar.vue'
 
 import homeUnSelected from '@/static/tab/home.png'
@@ -78,6 +77,7 @@ export default {
 }
 </script>
 
-<style lang="less">
-
+<style lang="less" scoped>
+.layout {
+}
 </style>

@@ -1,61 +1,70 @@
 <template>
+  <div v-if="!custom" class="header-wrapper">
     <div v-if="position === 'left'" class="header header-left">
-        <div class="center">
-            <img v-if="back" class="back-icon" src="../../assets/back-black.png">
-            <span class="title title-left">{{title}}</span>
-        </div>
-        <div class="icon-group">
-            <img v-for="(icon, index) in icons" :key="icon" class="icon" :src="icon" @click="handleIconClick(index)">
-        </div>
+      <div class="center">
+        <img v-if="back" class="back-icon" src="../../assets/back-black.png">
+        <span class="title title-left">{{title}}</span>
+      </div>
+      <div class="icon-group">
+        <img v-for="(icon, index) in icons" :key="icon" class="icon" :src="icon" @click="handleIconClick(index)">
+      </div>
     </div>
     <div v-else-if="position === 'center'" class="header header-center">
-        <img v-if="back" class="back-icon" src="../../assets/back-black.png">
-        <span class="title title-center">{{title}}</span>
-        <div class="icon-group">
-            <img v-for="(icon, index) in icons" :key="icon" class="icon" :src="icon" @click="handleIconClick(index)">
-        </div>
+      <img v-if="back" class="back-icon" src="../../assets/back-black.png">
+      <span class="title title-center">{{title}}</span>
+      <div class="icon-group">
+        <img v-for="(icon, index) in icons" :key="icon" class="icon" :src="icon" @click="handleIconClick(index)">
+      </div>
     </div>
+  </div>
+  <div v-else class="header-wrapper">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'Header',
-    components: {},
-    props: {
-        back: {
-            type: Boolean,
-            default: false
-        },
-        title: {
-            type: String,
-            default: ''
-        },
-        position: {
-            type: String,
-            default: 'center',
-            validator (val) {
-                const set = ['center', 'left']
-                return set.includes(val)
-            }
-        },
-        icons: {
-            type: Array,
-            default: () => []
-        },
+  name: 'Header',
+  components: {},
+  props: {
+    custom: {
+      type: Boolean,
+      default: false
     },
-    data () {
-        return {}
+    back: {
+      type: Boolean,
+      default: false
     },
-    computed: {},
-    watch: {},
-    filters: {},
-    created () {
+    title: {
+      type: String,
+      default: ''
     },
-    methods: {
-        handleIconClick(index) {
-            this.$emit('icon-click', index)
-        }
+    position: {
+      type: String,
+      default: 'center',
+      validator(val) {
+        const set = ['center', 'left']
+        return set.includes(val)
+      }
     },
+    icons: {
+      type: Array,
+      default: () => []
+    },
+  },
+  data() {
+    return {}
+  },
+  computed: {},
+  watch: {},
+  filters: {},
+  created() {
+  },
+  methods: {
+    handleIconClick(index) {
+      this.$emit('icon-click', index)
+    }
+  },
 }
 </script>
 
@@ -63,16 +72,16 @@ export default {
 @import '../../theme/index.less';
 
 .header {
-    display: flex;
-    height: @header-height;
-    align-items: center;
-    padding: 0 15px;
+  display: flex;
+  height: @header-height;
+  align-items: center;
+  padding: 0 15px;
 }
 
 .header-left {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .header-center {
@@ -80,32 +89,38 @@ export default {
 }
 
 .center {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .icon {
-    width: 22px;
-    height: 22px;
-    margin-left: @spacing-row-lg;
+  width: 22px;
+  height: 22px;
+  margin-left: @spacing-row-lg;
 }
 
 .title {
-    color: @text-color;
+  color: @text-color;
 }
 
 .title-center {
-    font-size: @font-size-base;
+  font-size: @font-size-base;
 }
 
 .title-left {
-    font-size: @font-size-title;
-    font-weight: bold;
+  font-size: @font-size-title;
+  font-weight: bold;
 }
+
 .icon-group {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
 }
 </style>
