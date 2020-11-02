@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <router-view/>
-    <TabBar :tab="tab"/>
+    <TabBar v-if="!$route.meta.hidden" :tab="tab"/>
   </div>
 </template>
 
