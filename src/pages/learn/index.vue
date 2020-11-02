@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="stat">
-                <h3 class="sub-title">本周学习概况</h3>
+                <TitleBar title="本周学习概况"/>
                 <div class="stat-content">
                     <div class="echarts">
                         echarts
@@ -41,7 +41,7 @@
             </div>
 
             <div>
-                <h3 class="sub-title">最近学习</h3>
+                <TitleBar title="最近学习"/>
                 <div class="scroller">
                     <div class="list" :style="listStyle">
                         <div v-for="item in list" :key="item.title" class="cell">
@@ -57,13 +57,15 @@
 
 <script>
 import Header from '@/components/Header'
+import TitleBar from '@/components/TitleBar'
 
 import calendar from '@/assets/calendar.png'
 
 export default {
     name: 'Learn',
     components: {
-        Header
+        Header,
+        TitleBar,
     },
     data () {
         return {

@@ -61,7 +61,7 @@ export default {
     }
 
     .text {
-      font-size: @font-size-mid;
+      font-size: @font-size-base;
       color: @text-color;
       font-weight: normal;
       transition: font-weight 0.2s ease;

@@ -1,30 +1,35 @@
 <template>
-    <div v-if="!custom" class="header-wrapper">
+    <div v-if="!custom" class="header-wrapper" :style="style">
         <div v-if="position === 'left'" class="header header-left">
             <div class="center">
-                <img v-if="back" class="back-icon" src="../../assets/back-black.png">
-                <span class="title title-left">{{title}}</span>
+                <img v-if="back" class="back-icon" :src="backIcon" @click="handlerBack">
+                <span class="title title-left" :style="titleStyle">{{title}}</span>
             </div>
             <div class="icon-group">
-                <img v-for="(icon, index) in icons" :key="icon" class="icon" :src="icon"
+                <img v-for="(icon, index) in icons" :key="index" class="icon" :src="icon"
                      @click="handleIconClick(index)">
+                <slot name="right"></slot>
             </div>
         </div>
         <div v-else-if="position === 'center'" class="header header-center">
-            <img v-if="back" class="back-icon" src="../../assets/back-black.png">
-            <span class="title title-center">{{title}}</span>
+            <img v-if="back" class="back-icon" :src="backIcon" @click="handlerBack">
+            <span class="title title-left" :style="titleStyle">{{title}}</span>
             <div class="icon-group">
-                <img v-for="(icon, index) in icons" :key="icon" class="icon" :src="icon"
+                <img v-for="(icon, index) in icons" :key="index" class="icon" :src="icon"
                      @click="handleIconClick(index)">
+                <slot name="right"></slot>
             </div>
         </div>
     </div>
-    <div v-else class="header-wrapper">
+    <div v-else class="header-wrapper" :style="style">
         <slot></slot>
     </div>
 </template>
 
 <script>
+import lightBackIcon from '../../assets/back-white.png'
+import darkBackIcon from '../../assets/back-black.png'
+
 export default {
     name: 'Header',
     components: {},
@@ -37,9 +42,25 @@ export default {
             type: Boolean,
             default: false
         },
+        hideTitle: {
+            type: Boolean,
+            default: false
+        },
         title: {
             type: String,
             default: ''
+        },
+        titleSize: {
+            type: Number,
+            default: 26
+        },
+        theme: {
+            type: String,
+            default: 'dark'
+        },
+        background: {
+            type: String,
+            default: 'rgba(255,255,255, 0.97)'
         },
         position: {
             type: String,
@@ -55,9 +76,29 @@ export default {
         },
     },
     data () {
-        return {}
+        return {
+        }
     },
-    computed: {},
+    computed: {
+        style () {
+            return {
+                backgroundColor: this.background,
+            }
+        },
+        titleStyle () {
+            return {
+                opacity: this.hideTitle ? 0 : 1,
+                fontSize: this.titleSize + 'px'
+            }
+        },
+        backIcon() {
+            const map = {
+                light: lightBackIcon,
+                dark: darkBackIcon
+            }
+            return map[this.theme]
+        }
+    },
     watch: {},
     filters: {},
     created () {
@@ -65,6 +106,9 @@ export default {
     methods: {
         handleIconClick (index) {
             this.$emit('icon-click', index)
+        },
+        handlerBack() {
+            this.$router.back()
         }
     },
 }
@@ -94,12 +138,18 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex: 1;
 }
 
 .icon {
     width: 22px;
     height: 22px;
     margin-left: @spacing-row-lg;
+}
+
+.back-icon {
+    width: 22px;
+    height: 22px;
 }
 
 .title {
@@ -113,6 +163,10 @@ export default {
 .title-left {
     font-size: @font-size-title;
     font-weight: bold;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
 }
 
 .icon-group {
@@ -126,6 +180,7 @@ export default {
     top: 0;
     width: 100%;
     z-index: 999;
-    background: rgba(255,255,255, 0.97);
+    transition: all 0.3s ease;
 }
+
 </style>

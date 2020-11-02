@@ -32,10 +32,7 @@
                 </div>
             </div>
             <div>
-                <div class="title">
-                    <h3 class="sub-title">直播好课</h3>
-                    <span class="more">更多直播 ></span>
-                </div>
+                <TitleBar title="直播好课" more-text="更多直播 >"/>
                 <div class="scroller">
                     <div class="list" :style="listStyle">
                         <div v-for="item in list" :key="item.title" class="cell">
@@ -46,10 +43,7 @@
                 </div>
             </div>
             <div>
-                <div class="title">
-                    <h3 class="sub-title">火热抢购</h3>
-                    <span class="more">更多抢购 ></span>
-                </div>
+                <TitleBar title="火热抢购" more-text="更多抢购 >"/>
                 <div>
                     <div class="recommend">
                         <div v-for="(item, index) in recommendList" :key="index" class="cell">
@@ -69,6 +63,7 @@
 <script>
 import Vue from 'vue'
 import Header from '@/components/Header'
+import TitleBar from '@/components/TitleBar'
 import HomeHeader from '@/components/HomeHeader/HomeHeader'
 import { Swipe, SwipeItem, Lazyload } from 'vant'
 
@@ -79,6 +74,7 @@ export default {
     components: {
         Header,
         HomeHeader,
+        TitleBar,
         [Swipe.name]: Swipe,
         [SwipeItem.name]: SwipeItem
     },
@@ -214,7 +210,7 @@ export default {
     },
     computed: {
         listStyle () {
-            return `width: ${(300 + 15) * this.list.length}px`;
+            return `width: ${(300 + 15) * this.list.length}px`
         }
     },
     mounted () {
@@ -224,6 +220,7 @@ export default {
 
 <style lang="less" scoped>
 @import '../../theme/index.less';
+
 .content {
     padding: 15px;
 }
@@ -300,27 +297,6 @@ export default {
             margin-bottom: @spacing-row-base;
             background: #dd524d;
         }
-    }
-}
-
-.title {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: @spacing-col-lg;
-    margin-bottom: @spacing-col-md;
-
-    .sub-title {
-        color: @text-color;
-        font-size: @font-size-base;
-        font-weight: bold;
-    }
-
-
-    .more {
-        color: @text-color-grey;
-        font-size: @font-size-sm;
     }
 }
 
