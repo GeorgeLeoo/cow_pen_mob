@@ -5,7 +5,7 @@
         </keep-alive>
         <router-view v-else/>
 
-        <TabBar :tab="tab"/>
+        <TabBar v-if="!$route.meta.hidden" :tab="tab"/>
     </div>
 </template>
 

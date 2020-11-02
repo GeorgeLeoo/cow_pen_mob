@@ -12,6 +12,7 @@ const Classification = () => import('@/pages/classification/index')
 const Learn = () => import('@/pages/learn/index')
 const Square = () => import('@/pages/square/index')
 const Mine = () => import('@/pages/mine/index')
+const Group = () => import('@/pages/group/index')
 
 const NOT_FOUND = () => import('@/pages/login/index')
 
@@ -20,15 +21,19 @@ const constantRoutes = [
         name: 'login',
         path: '/login',
         component: Login,
-        hidden: true,
-        meta: { title: '登录' }
+        meta: {
+            title: '登录',
+            hidden: true,
+        }
     },
     {
         name: 'login-next',
         path: '/login-next',
         component: LoginNext,
-        hidden: true,
-        meta: { title: '登录' }
+        meta: {
+            title: '登录',
+            hidden: true,
+        }
     },
     {
         name: 'index',
@@ -46,6 +51,7 @@ const constantRoutes = [
                 meta: {
                     title: '首页',
                     cache: true,
+                    hidden: false,
                 }
             },
             {
@@ -55,6 +61,7 @@ const constantRoutes = [
                 meta: {
                     title: '找课',
                     cache: true,
+                    hidden: false,
                 }
             },
             {
@@ -64,6 +71,7 @@ const constantRoutes = [
                 meta: {
                     title: '学习',
                     cache: true,
+                    hidden: false,
                 }
             },
             {
@@ -73,6 +81,7 @@ const constantRoutes = [
                 meta: {
                     title: '广场',
                     cache: true,
+                    hidden: false,
                 }
             },
             {
@@ -82,7 +91,17 @@ const constantRoutes = [
                 meta: {
                     title: '我的',
                     cache: true,
+                    hidden: false,
                 }
+            },
+            {
+                name: 'group',
+                path: '/group',
+                component: Group,
+                meta: {
+                    title: '小组',
+                    hidden: true,
+                },
             },
         ]
     },
@@ -112,11 +131,11 @@ const constantRoutes = [
     //     component: () => import('@/views/error-page/401'),
     //     hidden: true
     // },
-    { path: '*', redirect: '/404', hidden: true }
+    {path: '*', redirect: '/404', hidden: true}
 ]
 
 const router = new VueRouter({
-    scrollBehavior: () => ({ y: 0 }),
+    scrollBehavior: () => ({y: 0}),
     routes: constantRoutes
 })
 
