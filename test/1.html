@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            height: 100px;
+        }
+        .a {
+            margin-bottom: 30px;
+            background-color: #007aff;
+            position: absolute;
+        }
+        .b {
+            margin-top: 20px;
+            background-color: rebeccapurple;
+            padding: 10px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="a box">
+        <div>2</div>
+    </div>
+    <div class="b box">
+        <div>3</div>
+    </div>
+</div>
+<script>
+    let f1 =  function(){
+        var n=999;
+        return function f2(){
+            console.log(n++)
+        }
+    }
+
+    let a = f1()
+
+    f1 = null
+
+    a()
+    a()
+    a()
+
+    a = null
+
+
+    console.log('ok')
+
+    class A{
+        aa = 1
+        constructor () {
+            console.log(this.aa)
+        }
+    }
+    a = new A()
+</script>
+</body>
+</html>

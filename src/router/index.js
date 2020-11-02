@@ -45,6 +45,7 @@ const constantRoutes = [
                 component: Home,
                 meta: {
                     title: '首页',
+                    cache: true,
                 }
             },
             {
@@ -53,6 +54,7 @@ const constantRoutes = [
                 component: Classification,
                 meta: {
                     title: '找课',
+                    cache: true,
                 }
             },
             {
@@ -61,6 +63,7 @@ const constantRoutes = [
                 component: Learn,
                 meta: {
                     title: '学习',
+                    cache: true,
                 }
             },
             {
@@ -69,6 +72,7 @@ const constantRoutes = [
                 component: Square,
                 meta: {
                     title: '广场',
+                    cache: true,
                 }
             },
             {
@@ -77,6 +81,7 @@ const constantRoutes = [
                 component: Mine,
                 meta: {
                     title: '我的',
+                    cache: true,
                 }
             },
         ]
