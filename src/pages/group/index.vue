@@ -158,7 +158,7 @@ export default {
                 this.icons = [searchDark, moreDark]
                 this.hideTitle = false
             } else {
-                this.background = 'none'
+                this.background = 'transparent '
                 this.theme = 'light'
                 this.icons = [searchLight, moreLight]
                 this.hideTitle = true

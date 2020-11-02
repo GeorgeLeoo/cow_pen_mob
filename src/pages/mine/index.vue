@@ -1,6 +1,6 @@
 <template>
     <div class="mine">
-        <Header position="left" :icons="icons" @icon-click="handlerIconClick"/>
+        <Header position="left" background="transparent" :icons="icons" @icon-click="handlerIconClick"/>
         <div class="content">
             <div class="top">
                 <img class="avatar" :src="avatarUrl" alt="">
