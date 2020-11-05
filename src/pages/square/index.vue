@@ -36,7 +36,7 @@
                 <ChatItem/>
             </div>
         </div>
-        <FloatingButton/>
+        <FloatingButton @click.native="handlerToPost"/>
     </div>
 </template>
 
@@ -112,6 +112,9 @@ export default {
         }
     },
     methods: {
+        handlerToPost() {
+            this.$router.push({name: 'publish-post'})
+        },
         handlerToJoin () {
             this.$router.push({ name: 'group' })
         },

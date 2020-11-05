@@ -12,8 +12,10 @@
             </div>
         </div>
         <div v-else-if="position === 'center'" class="header header-center">
-            <img v-if="back" class="back-icon" :src="backIcon" @click="handlerBack">
-            <span class="title title-left" :style="titleStyle">{{title}}</span>
+            <div class="back-icon-wrapper">
+                <img v-if="back" class="back-icon" :src="backIcon" @click="handlerBack">
+            </div>
+            <span class="title title-left title-center" :style="titleStyle">{{title}}</span>
             <div class="icon-group">
                 <img v-for="(icon, index) in icons" :key="index" class="icon" :src="icon"
                      @click="handleIconClick(index)">
@@ -122,6 +124,7 @@ export default {
     height: @header-height;
     align-items: center;
     padding: 0 15px;
+    position: relative;
 }
 
 .header-left {
@@ -131,7 +134,10 @@ export default {
 }
 
 .header-center {
-
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .center {
@@ -139,6 +145,10 @@ export default {
     flex-direction: row;
     align-items: center;
     flex: 1;
+}
+
+.back-icon-wrapper {
+    display: inline-block;
 }
 
 .icon {
@@ -181,6 +191,14 @@ export default {
     width: 100%;
     z-index: 999;
     transition: all 0.3s ease;
+}
+
+.title-center {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    z-index: -1;
 }
 
 </style>

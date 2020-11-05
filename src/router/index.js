@@ -13,6 +13,7 @@ const Learn = () => import('@/pages/learn/index')
 const Square = () => import('@/pages/square/index')
 const Mine = () => import('@/pages/mine/index')
 const Group = () => import('@/pages/group/index')
+const PublishPost = () => import('@/pages/publish-post/index')
 
 const NOT_FOUND = () => import('@/pages/login/index')
 
@@ -100,6 +101,15 @@ const constantRoutes = [
                 component: Group,
                 meta: {
                     title: '小组',
+                    hidden: true,
+                },
+            },
+            {
+                name: 'publish-post',
+                path: '/publish-post',
+                component: PublishPost,
+                meta: {
+                    title: '发布',
                     hidden: true,
                 },
             },
