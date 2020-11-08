@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div class="head">
-            <h1>UI组件库</h1>
+            <h1>Cow Pen Mobile UI组件库</h1>
         </div>
         <div class="main">
             <div>
@@ -40,48 +40,49 @@
 
                         <div class="example bg-white">
                             <h2 class="sub-title">示例</h2>
-                            <div class="">
-                                <div v-if="currentDoc[active] && currentDoc[active].examples">
-                                    <div v-for="(item, index) in currentDoc[active].examples" :key="index"
-                                         class="example-item">
-                                        <div class="mob">
-                                            <div v-if="item.title || item.desc" class="mob-top">
-                                                <h2 v-if="item.title" class="sub-title pt0">{{item.title}}</h2>
-                                                <p v-if="item.desc" class="components-desc pt0">{{item.desc}}</p>
-                                            </div>
-                                            <div class="container">
-                                                <TemplateComponent :component="currentDoc[active].component"
-                                                                   :data="item"/>
-                                            </div>
+                            <div v-if="currentDoc[active] && currentDoc[active].examples">
+                                <div v-for="(item, index) in currentDoc[active].examples" :key="index"
+                                     class="example-item">
+
+                                    <div class="mob">
+                                        <div v-if="item.title || item.desc" class="mob-top">
+                                            <h2 v-if="item.title" class="sub-title pt0">{{item.title}}</h2>
+                                            <p v-if="item.desc" class="components-desc pt0">{{item.desc}}</p>
                                         </div>
-                                        <div class="img-list">
-                                            <img v-for="(img, index) in item.imgList" :key="index" :src="img" alt="">
-                                        </div>
-                                        <div class="code-wrapper">
-                                            <el-collapse @change="handlerChange($event, index)">
-                                                <el-collapse-item name="1">
-                                                    <template slot="title"><p class="show-code-btn">
-                                                        {{showCollapse && index === collapseIndex ? '隐藏' : '显示'}}代码</p>
-                                                    </template>
-                                                    <div>
-                                                        <p v-if="item.demo && item.demo.desc"
-                                                           class="components-desc pt0">
-                                                            {{item.demo.desc}}</p>
-                                                        <pre v-if="item.demo && item.demo.code">
-                                                                <code>{{item.demo.code}}</code>
-                                                            </pre>
-                                                        <pre v-else>
-                                                                <code>{{generateCode(item)}}</code>
-                                                            </pre>
-                                                    </div>
-                                                </el-collapse-item>
-                                            </el-collapse>
+                                        <div class="container">
+                                            <TemplateComponent :component="currentDoc[active].component"
+                                                               :data="item"/>
                                         </div>
                                     </div>
+
+                                    <div class="img-list">
+                                        <img v-for="(img, index) in item.imgList" :key="index" :src="img" alt="">
+                                    </div>
+
+                                    <div class="code-wrapper">
+                                        <el-collapse @change="handlerChange($event, index)">
+                                            <el-collapse-item name="1">
+                                                <template slot="title"><p class="show-code-btn">
+                                                    {{showCollapse && index === collapseIndex ? '隐藏' : '显示'}}代码</p>
+                                                </template>
+                                                <div>
+                                                    <p v-if="item.demo && item.demo.desc"
+                                                       class="components-desc pt0">
+                                                        {{item.demo.desc}}</p>
+                                                    <pre v-if="item.demo && item.demo.code">
+                                                                <code>{{item.demo.code}}</code>
+                                                            </pre>
+                                                    <pre v-else>
+                                                                <code>{{generateCode(item)}}</code>
+                                                            </pre>
+                                                </div>
+                                            </el-collapse-item>
+                                        </el-collapse>
+                                    </div>
                                 </div>
-                                <div v-else class="mob">
-                                    <router-view/>
-                                </div>
+                            </div>
+                            <div v-else class="mob">
+                                <router-view/>
                             </div>
                         </div>
 
@@ -106,9 +107,10 @@
                                         <el-table-column
                                             prop="default"
                                             label="默认值"
-                                            width="180">
+                                            width="200">
                                             <template slot-scope="scope">
-                                            <span class="item">{{scope.row.default ? scope.row.default : '--'}}</span>
+                                                <span
+                                                    class="item">{{scope.row.default ? scope.row.default : '--'}}</span>
                                             </template>
                                         </el-table-column>
                                         <el-table-column
@@ -118,6 +120,7 @@
                                     </el-table>
                                 </div>
                             </div>
+
                             <div v-if="currentDoc[active].events" class="doc">
                                 <div v-for="(event, index) in currentDoc[active].events" :key="index" class="bg-white">
                                     <h2 v-if="event.title" class="sub-title">{{event.title}}</h2>
@@ -290,9 +293,19 @@ export default {
             return result.join(' ')
         },
         generateCode (item) {
+            const props = this.generateProps(item.props)
+            const events = this.generateEvents(item.events)
             let result = '\n<template>'
-            result += '\n\t<' + this.active + '\n\t'
-            result += ' ' + this.generateProps(item.props) + ' ' + this.generateEvents(item.events)
+            result += '\n\t<' + this.active
+            if (props.length > 0 || events.length > 0) {
+                result += '\n\t'
+            }
+            if (props.length > 0) {
+                result += ' ' + props
+            }
+            if (events.length > 0) {
+                result += ' ' + events
+            }
             result += '></' + this.active + '>'
             result += '\n</template>'
             result += '\n'
@@ -404,6 +417,7 @@ html {
         width: 200px;
         position: sticky;
         top: 0;
+        user-select: none;
     }
 
 

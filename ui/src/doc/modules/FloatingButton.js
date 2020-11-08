@@ -1,7 +1,7 @@
 export default {
     title: 'FloatingButton',
     componentName: 'FloatingButton',
-    desc: '显示在右下角的图标',
+    desc: '浮动图标',
     props: [
         {
             title: '属性',
@@ -21,9 +21,8 @@ export default {
     examples: [
         {
             title: '',
-            desc: '',
-            props: {
-            },
+            desc: '显示在页面右下角的图标',
+            props: {},
         },
     ]
 }

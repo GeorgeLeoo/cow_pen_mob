@@ -141,7 +141,7 @@ export default {
          */
         handlerTab (item, index) {
             this.activeIndex = index
-            this.$router.push({ path: item.path })
+            this.$router.push({ path: item.path }).then(() => {}).catch(() => {})
         }
     }
 }

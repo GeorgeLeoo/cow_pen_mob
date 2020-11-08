@@ -102,7 +102,8 @@ export default {
                 'title': '我是标题',
                 'back': true,
                 'titleSize': 28,
-                background: 'red'
+                background: 'red',
+                theme: 'light'
             },
             events: {
                 more () {

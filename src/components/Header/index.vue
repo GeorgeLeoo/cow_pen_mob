@@ -90,7 +90,8 @@ export default {
         titleStyle () {
             return {
                 opacity: this.hideTitle ? 0 : 1,
-                fontSize: this.titleSize + 'px'
+                fontSize: this.titleSize + 'px',
+                color: this.theme === 'dark' ? '#333' : (this.theme === 'light' ?  '#fff' : '#333')
             }
         },
         backIcon() {
