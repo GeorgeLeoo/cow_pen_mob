@@ -89,7 +89,7 @@
                         <div v-if="currentDoc[active]">
                             <div v-if="currentDoc[active].props" class="doc">
                                 <div v-for="(prop, index) in currentDoc[active].props" :key="index" class="bg-white">
-                                    <h2 v-if="prop.title" class="sub-title">{{prop.title}}</h2>
+                                    <h2 v-if="prop.category" class="sub-title">{{prop.title}}</h2>
                                     <p v-if="prop.desc" class="components-desc">{{prop.desc}}</p>
                                     <el-table
                                         :data="prop.children"
@@ -123,7 +123,7 @@
 
                             <div v-if="currentDoc[active].events" class="doc">
                                 <div v-for="(event, index) in currentDoc[active].events" :key="index" class="bg-white">
-                                    <h2 v-if="event.title" class="sub-title">{{event.title}}</h2>
+                                    <h2 v-if="event.category" class="sub-title">{{event.title}}</h2>
                                     <p v-if="event.desc" class="components-desc">{{event.desc}}</p>
                                     <el-table
                                         :data="event.children"
@@ -279,9 +279,10 @@ export default {
                 fn = arr.join('\n')
                 fn = fn + '\n\t\t},'
                 eventName = eventName.charAt(0).toLocaleUpperCase() + eventName.substring(1, eventName.length)
-                result.push(`\thandler${eventName}${fn}`)
+                result.push(`\n\t\thandler${eventName}${fn}`)
             }
-            return result.join(' ')
+            let final = result.join(' ')
+            return final.replace('\n', '')
         },
         generateEvents (events) {
             let result = []
@@ -317,7 +318,7 @@ export default {
             result += '\n\t\t}'
             result += '\n\t},'
             result += '\n\tmethods: {'
-            result += '\n\t' + this.generateMethods(item.events)
+            result += '\n' + this.generateMethods(item.events)
             result += '\n\t},'
             result += '\n}'
             result += '\n</' + 'script>'

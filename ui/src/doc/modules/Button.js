@@ -66,6 +66,10 @@ export default {
                 trigger () {
                     console.log('click me')
                     console.log('click me1')
+                },
+    
+                com () {
+                    console.log('click me')
                 }
             },
             demo: {
