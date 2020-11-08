@@ -1,7 +1,8 @@
 <template>
     <div class="tab-bar" :style="tabStyle">
         <div v-for="(item, index) in tabList" :key="item.text" class="tab-item" @click="handlerTab(item, index)">
-            <img :style="iconStyle" :src="activeIndex === index ? item.selected : item.unselected" alt="icon">
+            <img v-show="activeIndex === index" :style="iconStyle" :src="item.selected" alt="icon">
+            <img v-show="activeIndex !== index" :style="iconStyle" :src="item.unselected" alt="icon">
             <span :style="activeIndex === index ? activeFontStyle : deActiveFontStyle">{{item.text}}</span>
         </div>
     </div>
@@ -13,8 +14,11 @@ export default {
     props: {
         tab: {
             type: Object,
-            default: () => {
-            }
+            default: () => {return {}}
+        },
+        fixed: {
+            type: Boolean,
+            default: true
         }
     },
     data () {
@@ -107,6 +111,7 @@ export default {
         },
         tabStyle () {
             return {
+                position: this.fixed ? 'fixed' : '',
                 backgroundColor: this.backgroundColor,
                 height: this.height
             }
@@ -146,7 +151,6 @@ export default {
 @import '../../theme/index.less';
 
 .tab-bar {
-    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;

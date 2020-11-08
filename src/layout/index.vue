@@ -10,22 +10,20 @@
 </template>
 
 <script>
-import TabBar from '@/components/TabBar/TabBar.vue'
+import TabBar from '@/components/TabBar'
 
-import homeUnSelected from '@/static/tab/home.png'
-import homeSelected from '@/static/tab/home_selected.png'
-
-import allUnSelected from '@/static/tab/all.png'
-import allSelected from '@/static/tab/all_selected.png'
-
-import findUnSelected from '@/static/tab/find.png'
-import findSelected from '@/static/tab/find_selected.png'
-
-import learnUnSelected from '@/static/tab/learn.png'
-import learnSelected from '@/static/tab/learn_selected.png'
-
-import mineUnSelected from '@/static/tab/mine.png'
-import mineSelected from '@/static/tab/mine_selected.png'
+import {
+    homeUnSelected,
+    homeSelected,
+    allUnSelected,
+    allSelected,
+    findUnSelected,
+    findSelected,
+    learnUnSelected,
+    learnSelected,
+    mineUnSelected,
+    mineSelected
+} from '@/icon'
 
 export default {
     name: 'Layout',

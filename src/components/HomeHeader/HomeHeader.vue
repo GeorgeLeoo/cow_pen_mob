@@ -2,18 +2,19 @@
   <div class="home-header">
     <Search :placeholder="hotKey" @search="handlerSearch"/>
     <div class="icon">
-      <img class="shop-car-icon" src="../../assets/shop_car.png">
+      <img class="shop-car-icon" :src="shopCar">
     </div>
   </div>
 </template>
 
 <script>
 import Search from '@/components/Search'
+import { shopCar} from '@/icon'
 
 export default {
   name: 'HomeHeader',
   components: {
-    Search
+      Search
   },
   props: {
     hotKey: {
@@ -22,7 +23,9 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+        shopCar
+    };
   },
   methods: {
     handlerSearch() {

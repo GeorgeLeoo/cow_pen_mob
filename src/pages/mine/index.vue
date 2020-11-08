@@ -1,11 +1,11 @@
 <template>
     <div class="mine">
-        <Header position="left" background="transparent" :icons="icons" @icon-click="handlerIconClick"/>
+        <Header position="center" :title="nickName" :title-size="20" :hide-title="hideTitle" :background="background" :icons="icons" @icon-click="handlerIconClick"/>
         <div class="content">
             <div class="top">
                 <img class="avatar" :src="avatarUrl" alt="">
                 <div class="top-right">
-                    <span class="nickname">NEMO</span>
+                    <span class="nickname">{{nickName}}</span>
                     <span>Level 4</span>
                 </div>
             </div>
@@ -65,7 +65,10 @@ export default {
     },
     data () {
         return {
+            nickName: 'NEMO',
+            hideTitle: true,
             icons: [setting, msg],
+            background: 'transparent',
             avatarUrl: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1450427682,1294931235&fm=26&gp=0.jpg',
             subList: [
                 [
@@ -99,6 +102,21 @@ export default {
                 ],
             ]
         }
+    },
+    mounted () {
+        document.addEventListener('scroll', () => {
+            if (window.pageYOffset > 60) {
+                this.background = 'rgba(255,255,255,0.94)'
+                this.theme = 'dark'
+                this.icons = [setting, msg]
+                this.hideTitle = false
+            } else {
+                this.background = 'transparent '
+                this.theme = 'light'
+                this.icons = [setting, msg]
+                this.hideTitle = true
+            }
+        }, true)
     },
     methods: {
         /**
